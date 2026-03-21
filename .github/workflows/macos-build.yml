@@ -1,0 +1,55 @@
+# 每次 push 到 main：在 GitHub 云端用 Xcode 打 Release 包，并上传为 Artifact（Actions 页可下载）
+# 无需 Apple 签名即可构建；下载后若系统提示未验证开发者，属正常现象（与本地 scripts/package-release.sh 一致）
+
+name: macOS 打包
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+concurrency:
+  group: macos-build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: Xcode 版本
+        run: xcodebuild -version
+
+      - name: Release 构建
+        run: |
+          set -eo pipefail
+          xcodebuild \
+            -project HabitCredits.xcodeproj \
+            -scheme HabitCredits \
+            -configuration Release \
+            -derivedDataPath build/DerivedData \
+            -destination "platform=macOS" \
+            CODE_SIGN_IDENTITY=- \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+
+      - name: 打 zip
+        run: |
+          mkdir -p dist
+          APP="build/DerivedData/Build/Products/Release/HabitCredits.app"
+          test -d "$APP"
+          cp -R "$APP" dist/
+          cd dist
+          ditto -c -k --sequesterRsrc --keepParent HabitCredits.app HabitCredits-macOS.zip
+
+      - name: 上传构建产物（Artifacts）
+        uses: actions/upload-artifact@v4
+        with:
+          name: HabitCredits-macOS-${{ github.sha }}
+          path: dist/HabitCredits-macOS.zip
+          if-no-files-found: error

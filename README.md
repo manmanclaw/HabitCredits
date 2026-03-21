@@ -11,6 +11,8 @@
 
 代码托管、打包 zip、上传到 GitHub **Releases** 的步骤见：**[docs/GITHUB.md](docs/GITHUB.md)**。
 
+**CI**：推送到 `main` 后，GitHub Actions 会自动构建并上传 **Artifacts**（见仓库 **Actions** 页）。
+
 快速打包（生成 `dist/HabitCredits-macOS.zip`）：
 
 ```bash

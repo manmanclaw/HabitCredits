@@ -69,9 +69,17 @@ gh release create v1.0.0 dist/HabitCredits-macOS.zip \
 
 ---
 
-## 四、可选：用 GitHub Actions 自动打包
+## 四、CI/CD：每次提交自动云端打包
 
-若需要「打 tag 自动构建并上传 Release」，可在仓库添加 `.github/workflows/release.yml`。需要苹果开发者证书与 Secrets 配置，复杂度较高；有需求可再单独加。
+仓库已包含 **GitHub Actions** 工作流：`.github/workflows/macos-build.yml`。
+
+- **何时运行**：向 `main` 或 `master` **push** 时；对这些分支的 **Pull Request** 也会跑；也可在 Actions 里 **手动运行**（workflow_dispatch）。
+- **做什么**：在 GitHub 的 **macOS 虚拟机**上用 Xcode 打 **Release**，生成 `HabitCredits-macOS.zip`。
+- **去哪里下载**：仓库页 → **Actions** → 点进最近一次成功的工作流 → 底部 **Artifacts** → 下载 zip（不会自动出现在 Releases 里，避免每次 push 都造一个 Release）。
+
+> 与本地 `scripts/package-release.sh` 一样，默认 **不签名**（`CODE_SIGNING_ALLOWED=NO`）。若要 CI 里自动签名/公证，需把证书与 Secrets 配进仓库，可后续再加。
+
+若你希望 **打 tag（如 `v1.0.0`）时自动创建 Release 并附上 zip**，可以再加一条 workflow；需要时再说。
 
 ---
 
