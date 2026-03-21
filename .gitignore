@@ -1,0 +1,15 @@
+.DS_Store
+/.build
+/Packages
+xcuserdata/
+*.xcuserstate
+DerivedData/
+build/
+dist/
+*.dmg
+# 若曾把 zip 放在根目录，勿提交
+/HabitCredits-macOS.zip
+
+.swiftpm/configuration/registries.json
+.swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
+.netrc
