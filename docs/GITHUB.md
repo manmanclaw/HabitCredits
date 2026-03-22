@@ -40,7 +40,8 @@ chmod +x scripts/package-release.sh
 会在 `dist/` 下生成：
 
 - `HabitCredits.app`
-- `HabitCredits-macOS.zip`（用于发布）
+- `HabitCredits-macOS.zip`
+- `HabitCredits.dmg`（磁盘映像，双击即可挂载后拖入「应用程序」）
 
 > **说明**：脚本默认 `CODE_SIGNING_ALLOWED=NO`，适合本机测试或内部分发。若要对外公开下载且减少「无法验证开发者」提示，需用 Apple Developer 账号做**代码签名 + 公证（notarize）**，再在 Xcode 里用 Archive 流程导出；此处不展开。
 
@@ -79,7 +80,33 @@ gh release create v1.0.0 dist/HabitCredits-macOS.zip \
 
 > 与本地 `scripts/package-release.sh` 一样，默认 **不签名**（`CODE_SIGNING_ALLOWED=NO`）。若要 CI 里自动签名/公证，需把证书与 Secrets 配进仓库，可后续再加。
 
-若你希望 **打 tag（如 `v1.0.0`）时自动创建 Release 并附上 zip**，可以再加一条 workflow；需要时再说。
+### Tag 自动发版（推荐）
+
+仓库已包含：`.github/workflows/release-on-tag.yml`。
+
+当你 **推送以 `v` 开头的 tag**（例如 `v1.0.0`）时，会：
+
+1. 在云端打 Release 包，生成 **`HabitCredits-macOS.zip`** 与 **`HabitCredits.dmg`**  
+2. **自动创建 GitHub Release**，并把上述两个文件作为 **Assets** 上传（并生成简要 Release notes）
+
+### Release 页上的「源代码 zip」是什么？
+
+每个 Release 下方 **GitHub 会自动附带**「Source code (zip / tar.gz)」，那是 **仓库在该 tag 上的源码快照**，**无法关闭**。  
+**真正的安装包**请往下看 **Assets** 里的：
+
+- `HabitCredits.dmg`（推荐给用户）
+- `HabitCredits-macOS.zip`（解压得到 `.app`）
+
+若 **Assets** 里只有源码、没有 dmg/zip，说明 **Actions 工作流失败**，请到 **Actions** 里查看报错。
+
+本地命令示例：
+
+```bash
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+> Tag 须匹配 `v*`（如 `v1.0.0`），不要用 `1.0.0` 无 `v` 前缀，否则不会触发（除非你改 workflow）。
 
 ---
 

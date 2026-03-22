@@ -1,29 +1,26 @@
-# 每次 push 到 main：在 GitHub 云端用 Xcode 打 Release 包，并上传为 Artifact（Actions 页可下载）
-# 无需 Apple 签名即可构建；下载后若系统提示未验证开发者，属正常现象（与本地 scripts/package-release.sh 一致）
+# 推送 tag（如 v1.0.0）→ 云端打包 → 自动创建 GitHub Release 并附上 zip + dmg
+#
+# 使用方式：
+#   git tag v1.0.0
+#   git push origin v1.0.0
 
-name: macOS 打包
+name: Tag 发布
 
 on:
   push:
-    branches: [main, master]
-  pull_request:
-    branches: [main, master]
-  workflow_dispatch:
+    tags:
+      - "v*"
 
-concurrency:
-  group: macos-build-${{ github.ref }}
-  cancel-in-progress: true
+permissions:
+  contents: write
 
 jobs:
-  build:
+  release:
     runs-on: macos-latest
 
     steps:
       - name: 检出代码
         uses: actions/checkout@v4
-
-      - name: Xcode 版本
-        run: xcodebuild -version
 
       - name: Release 构建
         run: |
@@ -49,11 +46,12 @@ jobs:
           ditto -c -k --sequesterRsrc --keepParent HabitCredits.app HabitCredits-macOS.zip
           hdiutil create -volname "HabitCredits" -srcfolder "HabitCredits.app" -ov -format UDZO "HabitCredits.dmg"
 
-      - name: 上传构建产物（Artifacts）
-        uses: actions/upload-artifact@v4
+      - name: 创建 Release 并上传安装包
+        uses: softprops/action-gh-release@v2
         with:
-          name: HabitCredits-macOS-${{ github.sha }}
-          path: |
+          files: |
             dist/HabitCredits-macOS.zip
             dist/HabitCredits.dmg
-          if-no-files-found: error
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

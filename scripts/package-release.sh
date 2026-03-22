@@ -13,8 +13,9 @@ DERIVED="$ROOT/build/DerivedData"
 OUT="$ROOT/dist"
 APP_NAME="HabitCredits.app"
 ZIP_NAME="HabitCredits-macOS.zip"
+DMG_NAME="HabitCredits.dmg"
 
-rm -rf "$DERIVED" "$OUT/$APP_NAME" "$OUT/$ZIP_NAME"
+rm -rf "$DERIVED" "$OUT/$APP_NAME" "$OUT/$ZIP_NAME" "$OUT/$DMG_NAME"
 mkdir -p "$OUT"
 
 echo "==> xcodebuild ($CONFIG)…"
@@ -40,5 +41,10 @@ cp -R "$BUILT" "$OUT/"
   ditto -c -k --sequesterRsrc --keepParent "$APP_NAME" "$ZIP_NAME"
 )
 
-echo "==> 完成: $OUT/$ZIP_NAME"
-echo "    可将该 zip 作为 GitHub Release 的附件上传。"
+echo "==> 生成 DMG…"
+hdiutil create -volname "HabitCredits" -srcfolder "$OUT/$APP_NAME" -ov -format UDZO "$OUT/$DMG_NAME"
+
+echo "==> 完成:"
+echo "    $OUT/$ZIP_NAME"
+echo "    $OUT/$DMG_NAME"
+echo "    可上传到 GitHub Releases。"
