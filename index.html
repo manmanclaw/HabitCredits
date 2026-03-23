@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>事项·积分 - 应用介绍与下载</title>
+    <meta
+      name="description"
+      content="事项·积分：macOS 轻量打卡与积分统计工具。支持清单管理、趋势图、菜单栏快捷记录。"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <div class="wrap">
+        <p class="badge">macOS 原生应用</p>
+        <h1>事项·积分</h1>
+        <p class="lead">
+          用最轻量的方式记录每日事项，自动积分，快速看清趋势。支持清单管理、双人模式与菜单栏快捷打卡。
+        </p>
+        <div class="cta">
+          <a id="btn-dmg" class="btn primary" href="#">下载 DMG（推荐）</a>
+          <a id="btn-zip" class="btn" href="#">下载 ZIP</a>
+          <a id="btn-github" class="btn ghost" href="#" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <section class="card">
+        <h2>功能亮点</h2>
+        <ul>
+          <li>今日记录：一键打卡，按规则自动加分/扣分</li>
+          <li>积分统计：近 7 天 / 30 天趋势图与构成分析</li>
+          <li>清单管理：可配置图标、分数与时间分段规则</li>
+          <li>菜单栏：不打断当前工作即可快速记录</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>系统要求</h2>
+        <p>macOS 15.0 及以上版本。</p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap">
+        <p>© <span id="year"></span> 事项·积分</p>
+      </div>
+    </footer>
+
+    <script src="./config.js"></script>
+    <script>
+      (function () {
+        const cfg = window.HABITCREDITS || {};
+        const repo = cfg.githubRepo || "manmanclaw/HabitCredits";
+        const base = `https://github.com/${repo}/releases/latest/download/`;
+
+        const dmg = document.getElementById("btn-dmg");
+        const zip = document.getElementById("btn-zip");
+        const gh = document.getElementById("btn-github");
+
+        if (dmg) dmg.href = base + "HabitCredits.dmg";
+        if (zip) zip.href = base + "HabitCredits-macOS.zip";
+        if (gh) gh.href = `https://github.com/${repo}`;
+
+        document.getElementById("year").textContent = new Date().getFullYear();
+      })();
+    </script>
+  </body>
+</html>
