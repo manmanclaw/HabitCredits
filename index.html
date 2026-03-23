@@ -1,70 +1,148 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>事项·积分 - 应用介绍与下载</title>
+    <title>事项·积分 - Mac 上的轻量打卡与积分记录</title>
     <meta
       name="description"
-      content="事项·积分：macOS 轻量打卡与积分统计工具。支持清单管理、趋势图、菜单栏快捷记录。"
+      content="事项·积分是 macOS 原生应用：今日记录、积分统计、清单管理、菜单栏快捷与双人模式。免费下载 DMG / ZIP。"
     />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <header class="hero">
-      <div class="wrap">
-        <p class="badge">macOS 原生应用</p>
-        <h1>事项·积分</h1>
-        <p class="lead">
-          用最轻量的方式记录每日事项，自动积分，快速看清趋势。支持清单管理、双人模式与菜单栏快捷打卡。
-        </p>
-        <div class="cta">
-          <a id="btn-dmg" class="btn primary" href="#">下载 DMG（推荐）</a>
-          <a id="btn-zip" class="btn" href="#">下载 ZIP</a>
-          <a id="btn-github" class="btn ghost" href="#" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="brand" href="#">
+          <span class="brand-icon">✔</span>
+          <span class="brand-name">事项·积分</span>
+        </a>
+        <div class="header-actions">
+          <a class="nav-link" id="nav-github" href="#" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a class="btn btn-primary" href="#download">下载应用</a>
         </div>
       </div>
     </header>
 
-    <main class="wrap">
-      <section class="card">
-        <h2>功能亮点</h2>
-        <ul>
-          <li>今日记录：一键打卡，按规则自动加分/扣分</li>
-          <li>积分统计：近 7 天 / 30 天趋势图与构成分析</li>
-          <li>清单管理：可配置图标、分数与时间分段规则</li>
-          <li>菜单栏：不打断当前工作即可快速记录</li>
-        </ul>
+    <main>
+      <section class="hero">
+        <div class="wrap hero-inner">
+          <p class="hero-badge">macOS 原生 · SwiftUI</p>
+          <h1>把每一天的小事，变成可看见的积分</h1>
+          <p class="hero-lead">
+            <strong>事项·积分</strong>
+            帮你用「今日记录」打卡加分/扣分，用图表看清趋势，在「清单管理」里自定义规则。支持菜单栏随手记、双人模式与数据导入导出。
+          </p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" id="hero-dmg" href="#">下载 DMG（推荐）</a>
+            <a class="btn btn-secondary" id="hero-zip" href="#">下载 ZIP</a>
+          </div>
+          <p class="hero-note">适用于 macOS 15 及以上。首次打开若提示未验证开发者，可在「系统设置 → 隐私与安全性」中允许。</p>
+        </div>
       </section>
 
-      <section class="card">
-        <h2>系统要求</h2>
-        <p>macOS 15.0 及以上版本。</p>
+      <section class="features-section">
+        <div class="wrap">
+          <h2>功能亮点</h2>
+          <div class="features-grid">
+            <article class="feature-card">
+              <div class="icon">✓</div>
+              <h3>今日记录</h3>
+              <p>按日打卡，正向加分、负向扣分一目了然；时间分段规则自动算分。</p>
+            </article>
+            <article class="feature-card">
+              <div class="icon">📊</div>
+              <h3>积分统计</h3>
+              <p>柱状图与趋势浏览历史数据，支持近 7 天 / 30 天视角。</p>
+            </article>
+            <article class="feature-card">
+              <div class="icon">📋</div>
+              <h3>清单管理</h3>
+              <p>自定义清单项、图标与分数；简单勾选或时间分段两种形态。</p>
+            </article>
+            <article class="feature-card">
+              <div class="icon">🧑‍🤝‍🧑</div>
+              <h3>双人模式</h3>
+              <p>同一套清单，分别为两位成员记录与统计。</p>
+            </article>
+            <article class="feature-card">
+              <div class="icon">⏱</div>
+              <h3>菜单栏</h3>
+              <p>常驻菜单栏，不打断当前工作即可快速打卡。</p>
+            </article>
+            <article class="feature-card">
+              <div class="icon">💾</div>
+              <h3>数据自主</h3>
+              <p>导入 / 导出备份，清除数据前可留档。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="download" class="download-section">
+        <div class="wrap">
+          <div class="download-card">
+            <h2>下载</h2>
+            <p>从 GitHub Releases 获取最新安装包（发布新版本后自动更新链接）。</p>
+            <div class="download-actions">
+              <a class="btn btn-primary" id="link-dmg" href="#">下载 HabitCredits.dmg</a>
+              <a class="btn btn-secondary" id="link-zip" href="#">下载 HabitCredits-macOS.zip</a>
+            </div>
+            <p class="download-note">安装 DMG：打开映像后，将应用拖入「应用程序」文件夹即可。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="requirements-section">
+        <div class="wrap">
+          <h2>系统要求</h2>
+          <div class="requirements-card">
+            <ul>
+              <li>macOS 15.0 或更高版本</li>
+              <li>Apple Silicon / Intel 通用（以实际构建为准）</li>
+              <li>可选：登录时启动、菜单栏仅后台运行（可在应用内设置）</li>
+            </ul>
+          </div>
+        </div>
       </section>
     </main>
 
-    <footer class="footer">
+    <footer class="site-footer">
       <div class="wrap">
-        <p>© <span id="year"></span> 事项·积分</p>
+        <a id="footer-github" href="#" target="_blank" rel="noopener noreferrer">在 GitHub 查看源码与发版</a>
+        <p>© <span id="year"></span> 事项·积分 · HabitCredits</p>
       </div>
     </footer>
 
     <script src="./config.js"></script>
     <script>
       (function () {
-        const cfg = window.HABITCREDITS || {};
-        const repo = cfg.githubRepo || "manmanclaw/HabitCredits";
-        const base = `https://github.com/${repo}/releases/latest/download/`;
+        var cfg = window.HABITCREDITS || {};
+        var repo = cfg.githubRepo || "manmanclaw/HabitCredits";
+        var base = "https://github.com/" + repo + "/releases/latest/download/";
+        var gh = "https://github.com/" + repo;
 
-        const dmg = document.getElementById("btn-dmg");
-        const zip = document.getElementById("btn-zip");
-        const gh = document.getElementById("btn-github");
+        var ids = {
+          dmg: ["link-dmg", "hero-dmg"],
+          zip: ["link-zip", "hero-zip"],
+          gh: ["nav-github", "footer-github"]
+        };
 
-        if (dmg) dmg.href = base + "HabitCredits.dmg";
-        if (zip) zip.href = base + "HabitCredits-macOS.zip";
-        if (gh) gh.href = `https://github.com/${repo}`;
+        ids.dmg.forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el) el.href = base + "HabitCredits.dmg";
+        });
+        ids.zip.forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el) el.href = base + "HabitCredits-macOS.zip";
+        });
+        ids.gh.forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el) el.href = gh;
+        });
 
-        document.getElementById("year").textContent = new Date().getFullYear();
+        var year = document.getElementById("year");
+        if (year) year.textContent = String(new Date().getFullYear());
       })();
     </script>
   </body>
